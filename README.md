@@ -2,6 +2,10 @@
 
 Pick up where you left off.
 
+**[Download the latest Android APK](https://github.com/SamsonOluwaseun/lastmark/releases/latest/download/lastmark.apk)** · [All releases](https://github.com/SamsonOluwaseun/lastmark/releases)
+
+Open the link on your Android phone, then open the downloaded file. Android will ask you to allow installs from your browser the first time.
+
 Lastmark is a personal Android task planner built around one idea: when you come back from a break or a distraction, you should see your exact next step, not a long list.
 
 A Samlytics project.
