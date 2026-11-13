@@ -12,13 +12,30 @@ android {
         applicationId = "com.samlytics.lastmark"
         minSdk = 26
         targetSdk = 35
-        versionCode = 2
-        versionName = "0.2.0"
+        versionCode = 3
+        versionName = "0.2.1"
+    }
+
+    // Releases are signed with one permanent key so updates install over the top.
+    // CI writes the key from GitHub secrets. Without it, the debug key is used.
+    val keystorePath = System.getenv("LASTMARK_KEYSTORE_PATH")
+    val hasReleaseKey = !keystorePath.isNullOrBlank() && file(keystorePath).exists()
+
+    signingConfigs {
+        if (hasReleaseKey) {
+            create("lastmark") {
+                storeFile = file(keystorePath!!)
+                storePassword = System.getenv("LASTMARK_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("LASTMARK_KEY_ALIAS")
+                keyPassword = System.getenv("LASTMARK_KEY_PASSWORD")
+            }
+        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = if (hasReleaseKey) signingConfigs.getByName("lastmark") else signingConfigs.getByName("debug")
         }
     }
 

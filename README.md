@@ -6,6 +6,8 @@ Pick up where you left off.
 
 Open the link on your Android phone (Android 8.0 or later), then open the downloaded file. Android will ask you to allow installs from your browser the first time.
 
+**"App not installed"?** If you installed v0.2.0 or earlier, uninstall Lastmark first, then install again. From v0.2.1 every release is signed with the same key, so later updates install over the top.
+
 ---
 
 Lastmark is a free, open-source Android planner for people who have a lot to do, struggle to pick what comes first, and lose their place when they get distracted. It's a Samlytics community project.
@@ -99,6 +101,10 @@ Every push to `main` builds an APK. To publish a new version:
 3. Push to `main`.
 
 GitHub Actions creates the release, tags it and attaches `lastmark.apk`. The download link at the top of this page always points to the newest version.
+
+### Signing
+
+Releases are signed with one permanent key, stored as four GitHub Actions secrets: `LASTMARK_KEYSTORE_BASE64`, `LASTMARK_KEYSTORE_PASSWORD`, `LASTMARK_KEY_ALIAS` and `LASTMARK_KEY_PASSWORD`. Android only installs an update if it's signed with the same key as the installed app, so the workflow refuses to publish a release without them. Builds on forks and pull requests still run, signed with a temporary debug key.
 
 ## Brand
 
